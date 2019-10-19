@@ -9,6 +9,8 @@ slider4:-7<-60,60,1>Transpose 4
 slider5:-2<-60,60,1>Transpose 5
 slider6:0<-60,60,1>Transpose 6
 
+slider7:0<0,16,1>Midi OUT Channel
+
 in_pin:none
 out_pin:none
 
@@ -21,7 +23,6 @@ statNoteOff = $x80;
 @slider
 
 
-outChannel = 0;
 mode = 3;
 transpose1 = slider1;
 transpose2 = slider2;
@@ -57,14 +58,14 @@ function tuneChannel(channel)  (
             note < 0 ? note = 0; note > 127 ? note = 127;
 
             // modify MIDI message
-            msg1 = status + outChannel;
+            msg1 = status + channel;
             msg23 = (msg23 & $xFF00) | note;
           );
       m  );
       )
       : mode & 2 ? // redirect non-note events
       (
-        msg1 = status + outChannel;
+        msg1 = status + channel;
       );
     );
 );
@@ -77,13 +78,12 @@ while
     // message and channel
     status = msg1 & $xF0;
     channel = msg1 & $x0F;
-    slider7 = channel + 1;
     tuneChannel(channel);      
 ;
     
     // send message
     midisend(offset, msg1, msg23);
-    
+    slider7 = channel + 1;
     1; // continue loop
   );
 );
