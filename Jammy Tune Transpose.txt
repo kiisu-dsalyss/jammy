@@ -7,7 +7,7 @@ slider2:26<-60,60,1>Transpose 2
 slider3:17<-60,60,1>Transpose 3
 slider4:7<-60,60,1>Transpose 4
 slider5:-2<-60,60,1>Transpose 5
-slider6:-120<-60,60,1>Transpose 6
+slider6:-12<-60,60,1>Transpose 6
 
 slider7:0<0,16,1>Midi OUT Channel
 
